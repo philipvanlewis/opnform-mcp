@@ -1,0 +1,26 @@
+services:
+  opnform-mcp:
+    # Build locally, or use the published image:
+    #   image: ghcr.io/philipvanlewis/opnform-mcp:latest
+    build: .
+    image: opnform-mcp:latest
+    container_name: opnform-mcp
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      HOST: 0.0.0.0
+      PORT: "8080"
+    # Bind to loopback by default — put a reverse proxy / Cloudflare Tunnel in
+    # front for TLS. Change to "8080:8080" to expose directly (not recommended).
+    ports:
+      - "127.0.0.1:8080:8080"
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:8080/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

@@ -1,0 +1,44 @@
+name: Bug report
+description: Something isn't working as expected
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: A clear description of the bug, and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Tool / prompt used …
+        2. Arguments …
+        3. Result …
+    validations:
+      required: true
+  - type: dropdown
+    id: transport
+    attributes:
+      label: Transport
+      options: [stdio, http]
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: opnform-mcp version
+      placeholder: e.g. 0.1.0 (npx -y opnform-mcp / image tag)
+  - type: input
+    id: opnform
+    attributes:
+      label: OpnForm flavor
+      placeholder: self-hosted (image tag) or cloud
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: stderr / container logs. **Redact tokens and PII.**
+      render: shell

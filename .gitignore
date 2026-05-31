@@ -1,0 +1,17 @@
+# dependencies & build output
+node_modules/
+dist/
+
+# secrets & local config (never commit)
+.env
+.env.*
+!.env.example
+client-config/
+
+# logs & misc
+*.log
+npm-debug.log*
+coverage/
+.DS_Store
+.idea/
+.vscode/
