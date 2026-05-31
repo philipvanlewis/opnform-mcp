@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # ---- build stage ----------------------------------------------------------
-FROM node:22-alpine AS build
+FROM node:26-alpine AS build
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
@@ -10,7 +10,7 @@ COPY src ./src
 RUN npm run build && npm prune --omit=dev
 
 # ---- runtime stage --------------------------------------------------------
-FROM node:22-alpine AS runtime
+FROM node:26-alpine AS runtime
 LABEL org.opencontainers.image.title="opnform-mcp" \
       org.opencontainers.image.description="MCP server for OpnForm (Streamable HTTP)" \
       org.opencontainers.image.source="https://github.com/philipvanlewis/opnform-mcp" \
